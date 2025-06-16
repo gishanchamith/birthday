@@ -69,6 +69,35 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    const photoContainer = document.querySelector('.photos');
+    if (photoContainer) {
+        const figures = photoContainer.querySelectorAll('figure');
+        figures.forEach(fig => {
+            const rect = photoContainer.getBoundingClientRect();
+            const x = Math.random() * (rect.width - 160);
+            const y = Math.random() * (rect.height - 160);
+            fig.style.left = x + 'px';
+            fig.style.top = y + 'px';
+            fig.addEventListener('mousedown', startDrag);
+        });
+
+        function startDrag(e) {
+            const fig = e.currentTarget;
+            const offsetX = e.clientX - fig.offsetLeft;
+            const offsetY = e.clientY - fig.offsetTop;
+            function move(ev) {
+                fig.style.left = (ev.clientX - offsetX) + 'px';
+                fig.style.top = (ev.clientY - offsetY) + 'px';
+            }
+            function up() {
+                document.removeEventListener('mousemove', move);
+                document.removeEventListener('mouseup', up);
+            }
+            document.addEventListener('mousemove', move);
+            document.addEventListener('mouseup', up);
+        }
+    }
+
 
     const giftBtn = document.getElementById('gift-btn');
     const giftBox = document.getElementById('gift-box');

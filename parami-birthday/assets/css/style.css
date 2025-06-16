@@ -127,27 +127,27 @@ body.journey {
 }
 
 .stage-1 {
-    background: linear-gradient(#ffe8ec, #f9c5d1);
+    background: url('../images/IMG-20250616-WA0011.jpg') center/cover no-repeat;
 }
 
 .stage-2 {
-    background: #fffaf0;
+    background: url('../images/IMG-20250616-WA0012.jpg') center/cover no-repeat;
 }
 
 .stage-3 {
-    background: linear-gradient(#fffaf0, #ffe8ec);
+    background: url('../images/IMG-20250616-WA0010.jpg') center/cover no-repeat;
 }
 
 .stage-4 {
-    background: #fffaf0;
+    background: url('../images/IMG-20250616-WA0013.jpg') center/cover no-repeat;
 }
 
 .stage-5 {
-    background: linear-gradient(#f9c5d1, #ffe8ec);
+    background: url('../images/IMG-20250616-WA0015.jpg') center/cover no-repeat;
 }
 
 .stage-final {
-    background: #fffaf0;
+    background: url('../images/IMG-20250616-WA0007.jpg') center/cover no-repeat;
 }
 
 .message {
@@ -168,22 +168,24 @@ body.journey {
 }
 
 .stage-2 .photos {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
-    gap: 10px;
+    position: relative;
     width: 100%;
-    max-width: 900px;
+    height: 80vh;
 }
 
 .stage-2 figure {
+    position: absolute;
     background: #fff;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     padding: 5px;
     transform: rotate(-2deg);
     transition: transform 0.3s;
-    cursor: pointer;
-    width: 100%;
+    cursor: grab;
+    width: 150px;
     box-sizing: border-box;
+}
+.stage-2 figure:active {
+    cursor: grabbing;
 }
 
 .stage-2 figure:nth-child(even) {
@@ -360,6 +362,20 @@ footer {
 
 .stage-5 {
     overflow: hidden;
+}
+
+.stage-5 p {
+    background: rgba(255,255,255,0.7);
+    padding: 20px;
+    border-radius: 8px;
+    font-family: 'Comic Sans MS', cursive;
+    animation: fadeSlide 3s forwards;
+    opacity: 0;
+}
+
+@keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .heart {
