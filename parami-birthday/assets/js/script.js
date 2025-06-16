@@ -57,21 +57,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 cake.appendChild(c);
                 setTimeout(() => c.remove(), 1000);
             }
+            for (let i = 0; i < 3; i++) {
+                const b = document.createElement('div');
+                b.className = 'balloon';
+                b.style.left = 30 + i*20 + '%';
+                cake.appendChild(b);
+                setTimeout(() => b.remove(), 4000);
+            }
+            const wish = document.querySelector('.wish');
+            if (wish) wish.textContent = 'Wish made! 🎉';
         });
     }
 
-    const lightbox = document.getElementById('lightbox');
-    if (lightbox) {
-        document.querySelectorAll('#gallery img').forEach(img => {
-            img.addEventListener('click', () => {
-                lightbox.querySelector('img').src = img.src;
-                lightbox.classList.remove('hidden');
-            });
-        });
-        document.getElementById('lightbox-close').addEventListener('click', () => {
-            lightbox.classList.add('hidden');
-        });
-    }
 
     const giftBtn = document.getElementById('gift-btn');
     const giftBox = document.getElementById('gift-box');
@@ -90,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    const heartsStage = document.getElementById('hearts');
+    const heartsStage = document.body.classList.contains('journey') ? document.body : null;
     if (heartsStage) {
         setInterval(() => {
             const heart = document.createElement('div');
