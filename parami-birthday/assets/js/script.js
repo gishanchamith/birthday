@@ -1,8 +1,30 @@
 document.addEventListener('DOMContentLoaded', function() {
     const envelope = document.getElementById('envelope');
+    const starsContainer = document.querySelector('.stars');
+    if (starsContainer) {
+        for (let i = 0; i < 80; i++) {
+            const s = document.createElement('span');
+            s.className = 'star';
+            s.style.top = Math.random() * 100 + '%';
+            s.style.left = Math.random() * 100 + '%';
+            starsContainer.appendChild(s);
+        }
+    }
+
     if (envelope) {
         envelope.addEventListener('click', function() {
-            window.location.href = 'journey.html';
+            envelope.classList.add('open');
+            for (let i = 0; i < 10; i++) {
+                const sp = document.createElement('span');
+                sp.className = 'sparkle';
+                sp.style.top = 40 + Math.random() * 20 + '%';
+                sp.style.left = 40 + Math.random() * 20 + '%';
+                document.body.appendChild(sp);
+                setTimeout(() => sp.remove(), 800);
+            }
+            setTimeout(() => {
+                window.location.href = 'journey.html';
+            }, 600);
         });
     }
 
@@ -27,6 +49,27 @@ document.addEventListener('DOMContentLoaded', function() {
         cake.addEventListener('click', () => {
             document.querySelectorAll('.flame').forEach(f => f.style.display = 'none');
             cake.classList.add('celebrate');
+            for (let i = 0; i < 20; i++) {
+                const c = document.createElement('div');
+                c.className = 'confetti';
+                c.style.left = Math.random() * 100 + '%';
+                c.style.background = `hsl(${Math.random()*360},70%,60%)`;
+                cake.appendChild(c);
+                setTimeout(() => c.remove(), 1000);
+            }
+        });
+    }
+
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox) {
+        document.querySelectorAll('#gallery img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightbox.querySelector('img').src = img.src;
+                lightbox.classList.remove('hidden');
+            });
+        });
+        document.getElementById('lightbox-close').addEventListener('click', () => {
+            lightbox.classList.add('hidden');
         });
     }
 
@@ -34,7 +77,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const giftBox = document.getElementById('gift-box');
     if (giftBtn && giftBox) {
         giftBtn.addEventListener('click', () => {
-            giftBox.classList.toggle('hidden');
+            const opening = !giftBox.classList.contains('show');
+            giftBox.classList.toggle('show');
+            if (opening) {
+                for (let i = 0; i < 5; i++) {
+                    const b = document.createElement('div');
+                    b.className = 'balloon';
+                    b.style.left = 20 + i*15 + '%';
+                    document.body.appendChild(b);
+                    setTimeout(() => b.remove(), 4000);
+                }
+            }
         });
     }
     const heartsStage = document.getElementById('hearts');
@@ -42,11 +95,14 @@ document.addEventListener('DOMContentLoaded', function() {
         setInterval(() => {
             const heart = document.createElement('div');
             heart.className = 'heart';
+            if (Math.random() < 0.5) heart.classList.add('pink');
+            if (Math.random() < 0.5) heart.classList.add('small');
+            if (Math.random() > 0.7) heart.classList.add('large');
             heart.style.left = Math.random() * 100 + '%';
             heart.style.animationDuration = 3 + Math.random() * 2 + 's';
             heartsStage.appendChild(heart);
             setTimeout(() => heart.remove(), 5000);
-        }, 500);
+        }, 700);
     }
 });
 

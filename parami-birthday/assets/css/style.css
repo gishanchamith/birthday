@@ -6,9 +6,11 @@ body, html {
     overflow-x: hidden;
 }
 
+.hidden { display: none; }
+
 /* Landing Page */
 body.landing {
-    background: linear-gradient(#1b2735, #090a0f);
+    background: radial-gradient(circle at bottom, #1b2735, #090a0f 70%);
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -16,6 +18,32 @@ body.landing {
     align-items: center;
     color: #ffe066;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle 2s infinite alternate;
+}
+
+.sparkle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #ffe066;
+    border-radius: 50%;
+    opacity: 0;
+    animation: sparkle 0.8s forwards;
+}
+
+@keyframes sparkle {
+    from { transform: scale(0); opacity: 1; }
+    to { transform: scale(1.5); opacity: 0; }
 }
 
 .stars::before, .stars::after {
@@ -62,6 +90,12 @@ body.landing {
     position: absolute;
     top: 0;
     left: 0;
+    transition: transform 0.6s;
+    transform-origin: top;
+}
+
+.envelope.open .flap {
+    transform: rotateX(-180deg);
 }
 
 @keyframes float {
@@ -88,6 +122,22 @@ body.journey {
     align-items: center;
     text-align: center;
     padding: 20px;
+    position: relative;
+}
+
+.message {
+    background: #fff;
+    padding: 20px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+    max-width: 500px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .stage-2 .photos {
@@ -102,6 +152,11 @@ body.journey {
     padding: 5px;
     transform: rotate(-2deg);
     transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.stage-2 figure:nth-child(even) {
+    transform: rotate(2deg);
 }
 
 .stage-2 figure:hover {
@@ -118,6 +173,7 @@ body.journey {
     background: pink;
     position: relative;
     border-radius: 10px 10px 0 0;
+    cursor: pointer;
 }
 .cake .layers {
     position: absolute;
@@ -142,19 +198,106 @@ body.journey {
     border-radius: 50% 50% 0 0;
     animation: flicker 0.5s infinite alternate;
 }
+
+.cake.celebrate {
+    animation: bounce 0.6s;
+}
+
+.confetti {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #ffe066;
+    opacity: 0;
+    animation: confetti 1s forwards;
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes confetti {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(60px); opacity: 0; }
+}
 @keyframes flicker {
     from { opacity: 0.5; }
     to { opacity: 1; }
 }
 
-#gift-box.hidden {
-    display: none;
+.scroll-message {
+    background: #fff8dc;
+    padding: 20px;
+    border: 2px solid #d2a679;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    opacity: 0;
+    max-width: 500px;
+    animation: fadeIn 2s forwards;
+}
+
+#gift-box {
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+#gift-box.show {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
 }
 
 #gift-box img {
     max-width: 300px;
     display: block;
     margin: 0 auto;
+}
+
+#gift-btn {
+    background: #ffe066;
+    color: #5c3d2e;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+#lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#lightbox img {
+    max-height: 80vh;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+}
+
+#lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.5em;
+    color: #fff;
+    cursor: pointer;
 }
 
 #mute-toggle {
@@ -176,8 +319,8 @@ footer {
 }
 
 @keyframes hearts {
-    from { transform: translateY(0); opacity: 1; }
-    to { transform: translateY(-200px); opacity: 0; }
+    from { transform: translate(0,0); opacity: 1; }
+    to { transform: translate(-20px,-200px) rotate(30deg); opacity: 0; }
 }
 
 .stage-5::before {
@@ -199,8 +342,49 @@ footer {
     position: absolute;
     width: 20px;
     height: 20px;
-    background: red;
+    background: #e5989b;
     transform: rotate(45deg);
-    animation: hearts 5s linear infinite;
+    animation: hearts 5s linear forwards;
+}
+
+.stage-5 .heart::before,
+.stage-5 .heart::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    border-radius: 50%;
+}
+
+.stage-5 .heart::before { top: -50%; left: 0; }
+.stage-5 .heart::after { top: -50%; left: 50%; }
+
+.heart.small { width: 15px; height: 15px; }
+.heart.large { width: 25px; height: 25px; }
+.heart.pink { background: #fcd5ce; }
+
+.balloon {
+    position: absolute;
+    width: 20px;
+    height: 30px;
+    background: #fcd5ce;
+    border-radius: 10px 10px 10px 10px / 15px 15px 10px 10px;
+    animation: balloon 4s forwards;
+}
+
+.balloon::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    width: 2px;
+    height: 15px;
+    background: #555;
+}
+
+@keyframes balloon {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-200px); opacity: 0; }
 }
 
