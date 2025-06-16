@@ -5,6 +5,8 @@ body, html {
     font-family: Georgia, serif;
     overflow-x: hidden;
     font-size: 18px;
+
+    
 }
 
 .hidden { display: none; }
@@ -127,27 +129,85 @@ body.journey {
 }
 
 .stage-1 {
-    background: url('../images/IMG-20250616-WA0011.jpg') center/cover no-repeat;
+    background: linear-gradient(
+    135deg,
+    #ff9a9e 0%,  /* Soft pink */
+    #fad0c4 20%, /* Peach */
+    #fbc2eb 40%, /* Light pink */
+    #a6c1ee 60%, /* Soft blue */
+    #a18cd1 80%, /* Light purple */
+    #fbc2eb 100% /* Light pink */
+  );
 }
 
 .stage-2 {
-    background: url('../images/IMG-20250616-WA0012.jpg') center/cover no-repeat;
+background: linear-gradient(135deg, #fff9fc 0%, #ffecf1 50%, #ffe9f3 100%);
 }
 
 .stage-3 {
-    background: url('../images/IMG-20250616-WA0010.jpg') center/cover no-repeat;
+    background: url('https://m.media-amazon.com/images/S/aplus-media-library-service-media/74a4af94-6bcd-4e62-bbc6-60d944310d6b.__CR0,0,1464,625_PT0_SX1464_V1___.jpg') 
+    ;
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-color: linear-gradient(135deg, #fff9fc 0%, #ffecf1 50%, #ffe9f3 100%);
+ 
 }
 
 .stage-4 {
-    background: url('../images/IMG-20250616-WA0013.jpg') center/cover no-repeat;
+ background: linear-gradient(
+    -45deg,
+    #fff0f6,  /* Soft pink-white */
+    #dfff2b,  /* Light pink */
+    #ffecef,  /* Pink-peach */
+    #f153b5,  /* Pale pink */
+    #f8e8ff,  /* Soft lavender */
+    #8058d6   /* Very light purple */
+  );
+  background-size: 400% 400%;
+  animation: romanticGradient 12s ease infinite;
+  min-height: 100vh;
+}
+
+@keyframes romanticGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .stage-5 {
-    background: url('../images/IMG-20250616-WA0015.jpg') center/cover no-repeat;
+    background: linear-gradient(
+    -45deg,
+    #fff0f6,  /* Soft pink-white */
+    #dfff2b,  /* Light pink */
+    #ffecef,  /* Pink-peach */
+    #f153b5,  /* Pale pink */
+    #f8e8ff,  /* Soft lavender */
+    #8058d6   /* Very light purple */
+  );
+  background-size: 400% 400%;
+  animation: romanticGradient 12s ease infinite;
+  min-height: 100vh;
 }
 
 .stage-final {
-    background: url('../images/IMG-20250616-WA0007.jpg') center/cover no-repeat;
+    background: linear-gradient(
+    -45deg,
+    #fff0f6,  /* Soft pink-white */
+    #dfff2b,  /* Light pink */
+    #ffecef,  /* Pink-peach */
+    #f153b5,  /* Pale pink */
+    #f8e8ff,  /* Soft lavender */
+    #8058d6   /* Very light purple */
+  );
+  background-size: 400% 400%;
+  animation: romanticGradient 12s ease infinite;
+  min-height: 100vh;
 }
 
 .message {
@@ -231,7 +291,7 @@ body.journey {
 .wish {
     margin-top: 20px;
     font-size: 1.4em;
-    color: #e5989b;
+    color: #0026ff;
     font-family: 'Comic Sans MS', cursive;
 }
 .candles {
@@ -347,13 +407,6 @@ body.journey {
     cursor: pointer;
 }
 
-footer {
-    margin: 40px 0 20px;
-    font-size: 1.6em;
-    color: #fff;
-    background: linear-gradient(#f9a8b5, #e5989b);
-    padding: 15px 0;
-}
 
 @keyframes hearts {
     from { transform: translate(0,0); opacity: 1; }
